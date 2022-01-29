@@ -28,7 +28,7 @@ int main(){
 			}
 			else if (!nmk[nx][ny][nz]){
 				can_walk = true;
-				nmk[nx][ny][nz] = true;
+				nmk[x][y][z] = true;
 				x = nx;
 				y = ny;
 				z = nz;
