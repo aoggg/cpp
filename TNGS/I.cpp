@@ -1,18 +1,22 @@
 #include<iostream>
 using namespace std;
 
-int d[100], p[100], is_stop[100];
+int d[1000], p[1000], is_stop[1000];
 
 int main(){
 	int n, m;
 	cin >> n >> m;
-	for (int i = 1; i < m; i++){
-		cin >> d[m];
+	for (int i = 1; i <= m - 1; i++){
+		cin >> d[i];
 	}
 	int id, t, s, c;
 	for (int i = 1; i <= n; i++){
-		int v, stop, time = 0;
 		cin >> id >> t >> s >> c;
+		for (int j = 0; j < c; j++){
+			cin >> p[i];
+			is_stop[p[i]] = i;
+		}
+		int v, stop, time = s;
 		if (t == 1){
 			v = 3;
 			stop = 6;
@@ -20,18 +24,13 @@ int main(){
 		else if (t == 2){
 			v = 2;
 			stop = 4;
-		} 
+		}
 		else {
 			v = 1;
 			stop = 2;
 		}
-		time = s;
-		for (int j = 0; j < c; j++){
-			cin >> p[j];
-			is_stop[p[j]] = i;
-		}
 		cout << id << ' ' << s;
-		for (int j = 1; j < m; j++){
+		for (int j = 2; j <= m; j++){
 			time += d[j - 1] / v;
 			if (is_stop[j] != i){
 				cout << " --";
