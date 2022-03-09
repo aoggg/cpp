@@ -1,38 +1,38 @@
 #include<iostream>
 using namespace std;
 
-long long A[20];
+int A[25];
 
-long long counting (long long s, int num, int N, long long first, long long second){
-	if (num == N){
-		return first ^ second;
+long long counting (int s, long long F, long long S, int now, int N){
+	S |= A[now];
+	if (now == N - 1){
+		return F ^ S;
 	}
-	if (s % 2 == 0){
-		first = first | A[num];
-	}
-	else {
-		second = second | A[num];
+	if (s % 2 == 1){
+		F ^= S;
+		S = 0;
 	}
 	s >>= 1;
-	counting (s, num + 1, N, first, second);
+	return counting (s, F, S, now + 1, N);
 }
 
 int main(){
 	int N;
 	cin >> N;
-	long long situation = 1;
+	int situation = 1;
 	for (int i = 0; i < N; i++){
-		situation *= 2;
 		cin >> A[i];
+		situation *= 2;
 	}
+	situation /= 2;
 	bool first = true;
 	long long least;
-	for (long long i = 0; i < situation; i++){
+	for (int i = 0; i < situation; i++){
 		if (first){
+			least = counting (i, 0, 0, 0, N);
 			first = false;
-			least = counting (i, 0, N, 0, 0);
 		}
-		least = min (least, counting (i, 0, N, 0, 0));
+		least = min (counting (i, 0, 0, 0, N), least);
 	}
 	cout << least << '\n';
 	return 0;
