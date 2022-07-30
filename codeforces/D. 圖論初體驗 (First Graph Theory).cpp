@@ -1,3 +1,4 @@
+
 // Problem: D. 圖論初體驗 (First Graph Theory)
 // Contest: Codeforces - Ten Point Round #18 (Div. 3) TEST
 // URL: https://codeforces.com/group/E1FstFkHSb/contest/376401/problem/D
@@ -7,10 +8,9 @@
 // Powered by CP Editor (https://cpeditor.org)
 
 #include<iostream>
-#include<map>
 using namespace std;
 
-map <int, int> in, out;
+int in[200001], out[200001];
 
 int main(){
 	int n, m;

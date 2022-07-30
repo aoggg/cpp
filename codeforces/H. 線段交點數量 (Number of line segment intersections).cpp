@@ -7,10 +7,9 @@
 // Powered by CP Editor (https://cpeditor.org)
 
 #include<iostream>
-#include<map>
 using namespace std;
 
-map <int, int> spot, total;
+int spot[1000010], total[1000010];
 
 int main(){
 	ios_base::sync_with_stdio (false);
