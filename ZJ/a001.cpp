@@ -1,11 +1,9 @@
-#include<bits/stdc++.h>
+#include <iostream>
 using namespace std;
 
-int main()
-{
-	string a;
-	getline(cin, a);
-	cin>>a;
-	cout<<"hello, "<<a<<"\n";
+int main() {
+	string s;
+	cin >> s;
+	cout << "hello, " << s << '\n';
 	return 0;
- } 
+}
