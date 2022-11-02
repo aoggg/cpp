@@ -2,6 +2,8 @@
 #include "lib1617.h"
 using namespace std;
 
+// 尚未AC QQ
+
 int n;
 bool not_mid[1500];
 
