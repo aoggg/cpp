@@ -3,7 +3,7 @@ using namespace std;
 
 int main()
 {
-	int n, a, b, c, d, e;
+	long long n, a, b, c, d, e;
 	cin>>n;
 	for(c=1; c<=n; c++)
 	{

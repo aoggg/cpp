@@ -122,7 +122,6 @@ int main() {
 	for (int i = 0; i < name.size(); i++) {
 		if (family.node[i].parent == NO_PARENT) {
 			travel(i, 0);
-			break;
 		}
 	}
 	for (int i = 0; i < name.size(); i++) {
