@@ -1,21 +1,21 @@
-#include<bits/stdc++.h>
+#include <iostream>
 using namespace std;
 
-long long ans(long long &a, long long b, long long c){
-	if(a>b){
-		return c;
-	} 
-	else{
-		c=c*a;
-		a++;
-		ans(a, b, c);
+long long counter(long long a, long long b, long long ans) {
+	if (a > b) {
+		return ans;
+	}
+	else {
+		return counter(a + 1, b, ans * a);
 	}
 }
 
-int main(){
+int main() {
 	long long a, b, c;
-	cin>>a>>b;
-	c=1;
-	cout<<ans(a, b, c)<<"\n";
+	cin >> a >> b;
+	if (a > b) {
+		swap(a, b);
+	}
+	cout << counter(a, b, 1) << '\n';
 	return 0;
 }
