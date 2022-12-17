@@ -5,36 +5,36 @@ int ans = 0;
 bool visited[16][16];
 
 void counting (int x, int y, int h, int w, int area, int anum, int bnum){
-	if (area == h * w){//­è¦n¥eº¡ 
+	if (area == h * w){//å‰›å¥½å æ»¿
 		ans++;
 		return;
 	}
-	if (x == h && y == w){//ÁÙ¨Sº¡¦ı¬O¤w¸g¨S¦³¦ì¸m¤F 
+	if (x == h && y == w){//é‚„æ²’æ»¿ä½†æ˜¯å·²ç¶“æ²’æœ‰ä½ç½®äº† 
 		return;
 	}
-	if (y == w){//¶]¹L¤@¹Mµo²{¨S¿ìªk©ñ  ©Ò¥H¶]¨ì¤U¤@¦æ±qÀY¬İ 
+	if (y == w){//è·‘éä¸€éç™¼ç¾æ²’è¾¦æ³•æ”¾  æ‰€ä»¥è·‘åˆ°ä¸‹ä¸€è¡Œå¾é ­çœ‹ 
 		counting (x + 1, 0, h, w, area, anum, bnum);
 		return;
 	}
-	if (visited[x][y]){ //¤w¸g¦³ªF¦è©ñ¦b¨ºùØ¤F  ©Ò¥H¶]¨ì¤U¤@®æ¬İ 
+	if (visited[x][y]){ //å·²ç¶“æœ‰æ±è¥¿æ”¾åœ¨é‚£è£äº†  æ‰€ä»¥è·‘åˆ°ä¸‹ä¸€æ ¼çœ‹ 
 		counting (x, y + 1, h, w, area, anum, bnum);
 		return;
 	}
-	if (y + 1 < w && !visited[x][y + 1] && anum != 0){ //´ß¥H§â1 * 2ªº¾îµÛ©ñowob
+	if (y + 1 < w && !visited[x][y + 1] && anum != 0){ //æ®¼ä»¥æŠŠ1 * 2çš„æ©«è‘—æ”¾owob
 		visited[x][y + 1] = true;
 		visited[x][y] = true;
 		counting (x, y + 2, h, w, area + 2, anum - 1, bnum);
 		visited[x][y + 1] = false;
-		visited[x][y] = false; //­nÂk¹s¦]¬°§O¤HÁÙ©fªo¥Î¹L 
+		visited[x][y] = false; //æ­¸é›¶å› ç‚ºåˆ¥äººé‚„å¦¹æ²¹ç”¨é 
 	}
-	if (x + 1 < h && !visited[x + 1][y] && anum != 0){ //´ß¥H§â1 * 2ªºª½µÛ©ñ 
+	if (x + 1 < h && !visited[x + 1][y] && anum != 0){ //æ®¼ä»¥æŠŠ1 * 2çš„ç›´è‘—æ”¾
 		visited[x][y] = true;
 		visited[x + 1][y] = true;
 		counting (x, y + 1, h, w, area + 2, anum - 1, bnum);
 		visited[x][y] = false;
 		visited[x + 1][y] = false;
 	}
-	if (bnum != 0){ //ÁÙ¦³¤p¤è¶ôowo 
+	if (bnum != 0){ //é‚„æœ‰å°æ–¹å¡Šowo 
 		visited[x][y] = true;
 		counting (x, y + 1, h, w, area + 1, anum, bnum - 1);
 		visited[x][y] = false;

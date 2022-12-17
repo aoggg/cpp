@@ -1,8 +1,8 @@
 #include<iostream>
 using namespace std;
-
+ 
 long long apples[20];
-
+ 
 long long counting (int s, int num, long long first, long long second, int n){ 
 	if (num == n){
 		return abs (first - second);
@@ -14,9 +14,9 @@ long long counting (int s, int num, long long first, long long second, int n){
 		second += apples[num];
 	}
 	s >>= 1;
-	counting (s, num + 1, first, second, n); 
+	return counting (s, num + 1, first, second, n); 
 }
-
+ 
 int main(){
 	int n;
 	cin >> n;
