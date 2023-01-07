@@ -1,30 +1,40 @@
-#include<iostream>
+// ZJ a010
+
+#include <iostream>
 using namespace std;
 
-int main(){
+struct info {
+	int factor = 0;
+	int num = 0;
+};
+
+const int MAXN = 1300;
+
+info ans[MAXN];
+
+int main() {
 	int n;
-	cin >> n;
-	bool the_first = true;
-	int time = 0;
-	for ( int i = 2; n > 1; i++ ){
-		if ( n % i == 0 ){
-			if ( !the_first && time == 0 ){
-				cout << " * ";
+	scanf("%d", &n);
+	int total = 0;
+	for (int i = 2; i <= n; i++) {
+		if (n % i == 0) {
+			ans[total].factor = i;
+			while (n % i == 0) {
+				n /= i;
+				ans[total].num++;
 			}
-			if ( time == 0 ){
-				cout << i;
-			}
-			time++;
-			n /= i;
-			i--;
-			the_first = false;
-		}
-		else {
-			if ( time > 1 ){
-				cout << '^' << time;
-				time = 0;
-			}
+			total++;
 		}
 	}
+	for (int i = 0; i < total; i++) {
+		if (i != 0) {
+			printf(" * ");
+		}
+		printf("%d", ans[i].factor);
+		if (ans[i].num != 1) {
+			printf("^%d", ans[i].num);
+		}
+	}
+	puts("");
 	return 0;
 }
