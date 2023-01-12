@@ -31,15 +31,6 @@ struct BST {
 		init(l, id - 1, children[pos].left);
 		init(id + 1, r, children[pos].right);
 	}
-	
-	void output(const int &pos) {
-		if (pos == NOT_EXIST) {
-			return;
-		}
-		output(children[pos].left);
-		fprintf(stderr, "%d ", children[pos].id);
-		output(children[pos].right);
-	}
 };
 
 BST circle;
@@ -48,7 +39,6 @@ int main() {
 	int n, k;
 	scanf("%d%d", &n, &k);
 	circle.init(1, n, circle.root);
-	fprintf(stderr, "%d\n", circle.root);
-	circle.output(circle.root);
+	
 	return 0;
 }
