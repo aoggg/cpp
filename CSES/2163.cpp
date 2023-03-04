@@ -9,7 +9,7 @@
 #include <iostream>
 using namespace std;
 
-const int MAXN = 2e5 + 5;
+const int MAXN = 4 * (2e5 + 5);
 const int NOT_EXIST = -1;
 
 struct BST {
@@ -18,7 +18,7 @@ struct BST {
 		int right = NOT_EXIST, left = NOT_EXIST;
 	};
 	
-	info children[MAXN];
+	int children[MAXN];
 	int root = NOT_EXIST;
 	
 	void init(const int &l, const int &r, int &pos) {
@@ -30,6 +30,14 @@ struct BST {
 		children[pos].id = id;
 		init(l, id - 1, children[pos].left);
 		init(id + 1, r, children[pos].right);
+	}
+	
+	int found(int pos) {
+		
+	}
+	
+	void kill(int pos) {
+		
 	}
 };
 
