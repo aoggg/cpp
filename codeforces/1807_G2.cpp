@@ -1,6 +1,6 @@
-// Problem: G1. Subsequence Addition (Easy Version)
+// Problem: G2. Subsequence Addition (Hard Version)
 // Contest: Codeforces - Codeforces Round 859 (Div. 4)
-// URL: https://codeforces.com/contest/1807/problem/G1
+// URL: https://codeforces.com/contest/1807/problem/G2
 // Memory Limit: 256 MB
 // Time Limit: 2000 ms
 
