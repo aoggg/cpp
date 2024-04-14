@@ -1,58 +1,77 @@
-#include <iostream>
+#include<bits/stdc++.h>
+#define int long long
+// #include<iostream>
+// #include<queue>
+// #include<vector>
+// #include<set>
+// #include<utility>
+// #define pip pair<int, pair<int, int>>
 using namespace std;
 
-const int MAXN = 2e5 + 5;
+int n,p;
+vector<int> v;
 
-int a[MAXN], b[MAXN], c[MAXN];
+void PRINT()
+{
+	for(int i=0;i<v.size();i++)
+	{
+		cout<<v[i]<<' ';
+	}
+	cout<<'\n';
+}
 
-int main() {
-	string s;
-	getline(cin, s);
-	int pos = 0;
-	int la = 0, lb = 0;
-	for (pos = s.size() - 1, lb = 0; s[pos] != ' '; pos--, lb++) {
-		b[lb] = s[pos] - '0';
-		cerr << b[lb];
+signed main()
+{
+	cin>>n>>p;
+	
+	int now = n;
+	while(now>0)
+	{
+		v.push_back(now%p);
+		now /= p;
 	}
-	cerr << '\n';
-	for (la = 0, pos--; pos >= 0; pos--, la++) {
-		a[la] = s[pos] - '0';
-		cerr << a[la];
-	}
-	cerr << '\n';
-	int o;
-	cin >> o;
-	int lc = 0;
-	if (o == 1) { //a - b
-		for (int i = 0; lc < la; lc++, i++) {
-			if (a[i] < b[i]) {
-				a[i + 1]--;
-				c[lc] = a[i] + 10 - b[i];
-			}
-			else {
-				c[lc] = a[i] - b[i];
-			}
+	
+	int ans = 0;
+	
+	int cnt = 0;
+	int sz = v.size();
+	for(int i=0;i<sz;i++)
+	{
+		// cout<<v.size()<<'\n';
+		// PRINT();
+		if(i==v.size()-1)
+		{
+			ans += v[i];
+			break;
 		}
-		lc++;
-	}
-	else {
-		for (int i = 0; lc < la; lc++, i++) {
-			if (a[i] + b[i] >= 10) {
-				c[lc + 1]++;
-				c[lc] += a[i] + b[i] - 10;
-			}
-			else {
-				c[lc] += a[i] + b[i];
-			}
+		if(p-v[i]>v[i])
+		{
+			ans += v[i];
+			if(v[i]>0)cnt++;
 		}
-		lc++;
+		else
+		{
+			ans += (p-v[i]);
+			v[i] = 0;
+			bool go = true;
+			for(int j=i+1;j<sz;j++)
+			{
+				if(!go)break;
+				go = false;
+				v[j]++;
+				if(v[j]==p)
+				{
+					v[j] = 0;
+					go = true;
+				}
+			}
+			if(go)v.push_back(1);
+		}
+		// cout<<ans<<' '<<cnt<<'\n';
+		sz = v.size();
 	}
-	while (c[lc] == 0) {
-		lc--;
-	}
-	for (int i = lc; i >= 0; i--) {
-		cout << c[i];
-	}
-	cout << '\n';
+	cout<<ans*2-1;
+	
 	return 0;
 }
+	
