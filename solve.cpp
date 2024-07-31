@@ -1,77 +1,33 @@
-#include<bits/stdc++.h>
-#define int long long
-// #include<iostream>
-// #include<queue>
-// #include<vector>
-// #include<set>
-// #include<utility>
-// #define pip pair<int, pair<int, int>>
+#include <iostream>
 using namespace std;
+using ll = long long;
 
-int n,p;
-vector<int> v;
-
-void PRINT()
-{
-	for(int i=0;i<v.size();i++)
-	{
-		cout<<v[i]<<' ';
-	}
-	cout<<'\n';
-}
-
-signed main()
-{
-	cin>>n>>p;
-	
-	int now = n;
-	while(now>0)
-	{
-		v.push_back(now%p);
-		now /= p;
-	}
-	
-	int ans = 0;
-	
-	int cnt = 0;
-	int sz = v.size();
-	for(int i=0;i<sz;i++)
-	{
-		// cout<<v.size()<<'\n';
-		// PRINT();
-		if(i==v.size()-1)
-		{
-			ans += v[i];
-			break;
-		}
-		if(p-v[i]>v[i])
-		{
-			ans += v[i];
-			if(v[i]>0)cnt++;
-		}
-		else
-		{
-			ans += (p-v[i]);
-			v[i] = 0;
-			bool go = true;
-			for(int j=i+1;j<sz;j++)
-			{
-				if(!go)break;
-				go = false;
-				v[j]++;
-				if(v[j]==p)
-				{
-					v[j] = 0;
-					go = true;
-				}
+int main() {
+	int T;
+	cin >> T;
+	while (T--) {
+		ll M, W;
+		cin >> M >> W; // M - mod
+		W %= M;
+		ll sum = W;
+		ll L, C;
+		if (W % 2 == 0 && W % 4 != 0 && M % 4 == 0) cout << "-1\n";
+		else if (M % 2 != 0 || W % 2 != 0) {
+			while (sum < 3 || sum % 2 == 0) {
+				sum += M;
 			}
-			if(go)v.push_back(1);
+			C = (sum - 1) / 2;
+			L = C + 1;
+			cout << L << ' ' << C << '\n';
 		}
-		// cout<<ans<<' '<<cnt<<'\n';
-		sz = v.size();
+		else {
+			while (sum % 4 != 0) {
+				sum += M;
+			}
+			C = sum / 4 - 1;
+			L = C + 2;
+			cout << L << ' ' << C << '\n';
+		}
 	}
-	cout<<ans*2-1;
-	
 	return 0;
 }
-	
