@@ -23,17 +23,6 @@ bool check(int x, int y) {
     return true;
 }
 
-void status() {
-    for (int i = 1; i <= H; i++) {
-        for (int j = 1; j <= W; j++) {
-            if (visited[i][j]) printf("x");
-            else printf("o");
-        }
-        printf("\n");
-    }
-    puts("==========");
-}
-
 int main() {
     pq adjacent;
     ll S[MAXN][MAXN];
@@ -57,8 +46,7 @@ int main() {
         visited[P + MX[i]][Q + MY[i]] = true;
     }
     while (adjacent.size() != 0 && adjacent.top().first < cmp) {
-        status();
-        int str = adjacent.top().first;
+        ll str = adjacent.top().first;
         int x = adjacent.top().second.first;
         int y = adjacent.top().second.second;
         adjacent.pop();
@@ -76,7 +64,6 @@ int main() {
             }
         }
     }
-    status();
     printf("%lld\n", strength);
     return 0;
 }
