@@ -1,7 +1,42 @@
-#include<iostream>
-using namespace std;
+#include <iostream>
+#include <numeric>
+#include <set>
+#include <vector>
 
-int main()
-{
-    cout << "153,745,874,576,120,075,765,153,745,874,576,120,075,765,153,745,874,576,120,075,765,153,745,874,576,120,075,765,153,745,874,576,120,075,765,153,745,875,491,861,298,152,069,487,096,963,035,816,987,540,661,615,798,506,991,506,376,132,790,317,342,462,680,894,968,261,491,861,298,151@1\n";
+int main() {
+    using namespace std;
+    unsigned N;
+    unsigned long S;
+    cin >> N >> S;
+
+    vector<unsigned long> A(N);
+    for (auto& a : A)
+        cin >> a;
+
+    // Boil down to 0 <= S < X
+    const auto sum{reduce(begin(A), end(A))};
+    S %= sum;
+
+    // Repeat A twice
+    A.reserve(2 * N);
+    for (unsigned i{}; i < N; ++i)
+        A.emplace_back(A[i]);
+
+    // Find the cumulative sum
+    set<unsigned long> prefix_sum{};
+    prefix_sum.emplace();
+    for (unsigned long p{}; const auto a : A) {
+        p += a;
+        prefix_sum.insert(p);
+    }
+
+    // For each element p of the cumulative sums, check if (p + S) is contianed
+    for (const auto p : prefix_sum)
+        if (prefix_sum.contains(p + S)) {
+            cout << "Yes" << endl;
+            return 0;
+        }
+
+    cout << "No" << endl;
+    return 0;
 }
