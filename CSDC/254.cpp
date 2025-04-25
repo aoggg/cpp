@@ -1,50 +1,40 @@
 #include <iostream>
+#include <algorithm>
 #include <vector>
-#include <queue>
-#include <utility>
+#include <map>
+#include <cmath>
 using namespace std;
 using ll = long long;
 
-vector<pair<ll, int>> num;
-priority_queue<ll, vector<ll>, greater<ll>> ans;
-
-void cal(ll N) 
-{
-    ll tmp = N;
-    for (ll i = 2; i * i <= N && N > 1; i++) {
-        int n = 0;
-        while (N % i == 0) {
-            n++;
-            N /= i;
-        }
-        if (n >= 2) num.push_back(make_pair(i, n));
-    }
-}
-
-void dfs(int depth, ll now) {
-    if (depth >= num.size()) {
-        ans.push(now);
-        return;
-    }
-    ll n = num[depth].first;
-    ll tmp = 1;
-    int times = num[depth].second;
-    dfs(depth + 1, now);
-    for (int i = 0; i < times / 2; i++) {
-        tmp *= n;
-        dfs(depth + 1, now * tmp * tmp);
-    }
-}
+map<ll, bool> appeared;
+vector<ll> ans;
 
 int main()
 {
     ll N;
     scanf("%lld", &N);
-    cal(N);
-    dfs(0, 1);
-    while (ans.size() > 0) {
-        printf("%lld ", ans.top());
-        ans.pop();
+    for (ll i = 1; i * i * i <= N; i++) {
+        if (N % i == 0) {
+            if (N % (i * i) == 0) {
+                if (!appeared[i * i]) {
+                    appeared[i * i] = true;
+                    ans.push_back(i * i);
+                }
+            }
+            ll j = N / i;
+            ll sj = sqrtl(j);
+            if (sj * sj == j) {
+                if (!appeared[j]) {
+                    appeared[j] = true;
+                    ans.push_back(j);
+                }
+            }
+        }
+    }
+    sort(ans.begin(), ans.end());
+    for (int i = 0; i < ans.size(); i++) {
+        if (i != 0) printf(" ");
+        printf("%lld", ans[i]);
     }
     puts("");
     return 0;
