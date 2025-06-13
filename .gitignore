@@ -515,3 +515,6 @@ test
 solve.cpp
 APCS_葉宥均_ALL_2024-10-17.pdf
 test.cpp
+input.txt
+.gitignore
+output.txt
